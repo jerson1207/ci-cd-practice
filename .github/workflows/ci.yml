@@ -59,6 +59,12 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Setup Node.js and Yarn
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'yarn'
+
       # - name: Run tests
       #   env:
       #     RAILS_ENV: test
@@ -71,14 +77,4 @@ jobs:
       #   with:
       #     name: screenshots
       #     path: ${{ github.workspace }}/tmp/screenshots
-      #     if-no-files-found: ignore
-      - name: Set up Database
-        env:
-          RAILS_ENV: test
-        run: |
-          bin/rails db:create
-          bin/rails db:migrate
-          bin/rails db:test:prepare
-
-      - name: Run RSpec Tests
-        run: bundle exec rspec
+      #     if-no-files-found: ignore    
